@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Contoso Sales Report (Power BI) · Owen McMahon</title>
-<meta name="description" content="A 10-page Power BI report on Contoso retail sales, 2021 to 2024: star schema, data cleanup and nine business questions answered.">
+<title>My Power BI Work · Owen McMahon</title>
+<meta name="description" content="A Power BI report on Contoso retail sales: a star schema and nine business questions.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://owngoldengate.github.io/power-bi/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Contoso Sales Report (Power BI) · Owen McMahon">
-<meta property="og:description" content="A 10-page Power BI report on Contoso retail sales, 2021 to 2024.">
+<meta property="og:title" content="My Power BI Work · Owen McMahon">
+<meta property="og:description" content="A Power BI report on Contoso retail sales: a star schema and nine business questions.">
 <meta property="og:image" content="https://owngoldengate.github.io/power-bi/img/page-03.webp">
 <meta property="og:url" content="https://owngoldengate.github.io/power-bi/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,49 +56,21 @@ p { margin: 0; }
 .site-head nav a { font-size: 0.9rem; color: var(--muted); text-decoration: none; }
 .site-head nav a:hover { color: var(--ink); }
 
-.tags { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
 .back { font-size: 0.9rem; text-decoration: none; }
 .p-head { display: grid; gap: 16px; padding-block: clamp(32px, 6vw, 64px) clamp(20px, 3vw, 28px); }
 .p-head h1 { font-size: clamp(2.2rem, 6vw, 3.9rem); line-height: 1.05; max-width: 20ch; }
-.p-head .subhead { font-family: var(--font-display); font-weight: 600; font-size: var(--s1); }
-.p-head .lede { font-size: var(--s1); max-width: 56ch; color: var(--muted); }
-.p-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px 28px; margin: 0; padding-block: 18px; border-block: 1px solid var(--rule); }
-.p-facts div { display: grid; gap: 2px; }
-.p-facts dt { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-.p-facts dd { margin: 0; }
 
-.p-sec { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 12px 32px; padding-block: clamp(26px, 4vw, 40px); border-bottom: 1px solid var(--rule); }
-.p-sec > .caps { padding-top: 4px; }
-.p-sec > div { display: grid; gap: 18px; min-width: 0; }
-.p-sec ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
 
-/* The report pages */
-.toc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px 28px; counter-reset: q; }
-.toc li { counter-increment: q; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); font-size: 0.95rem; }
-.toc li::before { content: counter(q, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--s-1); color: var(--muted); padding-top: 2px; }
-.toc a { text-decoration: none; }
-.toc a:hover { text-decoration: underline; }
-
-.q { padding-block: clamp(30px, 5vw, 52px); border-bottom: 1px solid var(--rule); display: grid; gap: 18px; scroll-margin-top: 70px; }
-.q-head { display: grid; gap: 6px; }
-.q-head h2 { font-size: var(--s2); line-height: 1.2; max-width: 34ch; }
-.shot { margin: 0; display: grid; gap: 8px; }
-.shot a { display: block; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: #ffffff; line-height: 0; }
+/* Report pages */
+.q { padding-block: clamp(30px, 5vw, 52px); border-bottom: 1px solid var(--rule); display: grid; gap: 18px; }
+.q h2 { font-size: var(--s2); line-height: 1.2; max-width: 34ch; }
+.q .intro { max-width: 66ch; }
+.shot { display: block; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: #ffffff; line-height: 0; }
 .shot img { width: 100%; height: auto; display: block; }
-.shot figcaption { font-size: var(--s-1); color: var(--muted); }
-.answer { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 8px 32px; }
-.answer .lead { font-family: var(--font-display); font-weight: 600; font-size: var(--s1); line-height: 1.35; }
-.answer .body { display: grid; gap: 10px; max-width: 64ch; }
-.answer .caps { padding-top: 4px; color: var(--accent); }
-.how { font-size: 0.92rem; color: var(--muted); }
-.how strong { color: var(--ink); font-weight: 600; }
-
-.next { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; padding-block: 32px; }
 footer .wrap { padding-block: 26px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; border-top: 1px solid var(--rule); }
 
 @media (max-width: 820px) {
-  .p-sec, .answer { grid-template-columns: minmax(0, 1fr); }
-}
+  }
 @media (max-width: 560px) {
   .site-head nav a.opt { display: none; }
 }
@@ -127,218 +99,51 @@ footer .wrap { padding-block: 26px; display: flex; flex-wrap: wrap; justify-cont
 
     <section class="p-head" aria-labelledby="title">
       <a class="back" href="../#work">← All projects</a>
-      <ul class="tags"><li>Power BI</li><li>Data modeling</li><li>DAX</li><li>INFO 3402 · Fall 2026</li></ul>
-      <h1 id="title">Where Contoso’s money really comes from</h1>
-      <p class="subhead">A 10-page Power BI sales report, 2021 to 2024</p>
-      <p class="lede">I modeled four years of Contoso retail sales as a star schema, cleaned up the data’s traps, and built one page for each business question a sales team would ask, from best-selling products to who the repeat customers are.</p>
-      <dl class="p-facts">
-        <div><dt>Tool</dt><dd>Power BI (web)</dd></div>
-        <div><dt>Data</dt><dd>7,794 order lines, 3,165 customers, 74 stores</dd></div>
-        <div><dt>Period</dt><dd>May 2021 – April 2024</dd></div>
-        <div><dt>Total sales</dt><dd>$7.3M · 56% profit margin</dd></div>
-      </dl>
+      <h1 id="title">My Power BI Work</h1>
     </section>
 
-    <section class="p-sec" aria-labelledby="cleanup-title">
-      <h2 class="caps" id="cleanup-title">Data cleanup</h2>
-      <div>
-        <p>Three things in the raw data would have skewed the answers if I had charted it as-is:</p>
-        <ul>
-          <li><strong>Five currencies.</strong> Orders were placed in USD, EUR, GBP, CAD and AUD. I checked the prices against the product list and found they were all already stored in US dollars, with an exchange-rate column for the customer’s own currency. Every total in this report is in USD so the countries compare fairly.</li>
-          <li><strong>One store swamps the rest.</strong> The online store made $3.9M of the $7.3M in sales. I added a Sales Channel column (Online / Physical Store) so I could leave it out of the store ranking and use it on its own for the delivery question.</li>
-          <li><strong>Messy brand names.</strong> Some brand names had trailing spaces, which splits one brand into two in a chart. I added a trimmed Brand column.</li>
-        </ul>
-        <p class="how"><strong>Measures I wrote in DAX:</strong> Total Sales, Total Cost, Total Profit, Profit Margin %, Units Sold, Order Count, Repeat Customers and Average Delivery Days. <strong>Columns I added:</strong> Delivery Days, Order Month, Age Group and Customer Type (repeat or one-time).</p>
-      </div>
+    <section class="q" aria-labelledby="schema">
+      <h2 id="schema">Star Schema</h2>
+      <p class="intro">A star schema connects several tables through shared keys. In the middle is the factSales table, with one row for each item sold: the quantity, price and cost, plus a key for the product, customer and store. Around it are three dimension tables. dimProduct describes what was sold, dimCustomer describes who bought it, and dimStore describes where it was sold. Each dimension links to factSales one-to-many, because one product, customer or store can appear in many sales.</p>
+      <a class="shot" href="img/page-01.webp"><img src="img/page-01.webp" width="1458" height="1192" alt="Power BI model view: factSales in the middle, linked one-to-many to dimProduct, dimStore and dimCustomer." loading="lazy"></a>
     </section>
 
-    <section class="p-sec" aria-labelledby="toc-title">
-      <h2 class="caps" id="toc-title">The report</h2>
-      <div>
-        <ol class="toc">
-          <li><a href="#p01">How the data model works</a></li>
-          <li><a href="#p02">Top products by volume, per category</a></li>
-          <li><a href="#p03">Top products by revenue</a></li>
-          <li><a href="#p04">Top stores by revenue</a></li>
-          <li><a href="#p05">Most profitable categories</a></li>
-          <li><a href="#p06">Repeat customers</a></li>
-          <li><a href="#p07">Online delivery times</a></li>
-          <li><a href="#p08">Monthly sales and profit</a></li>
-          <li><a href="#p09">Spending by age group</a></li>
-          <li><a href="#p10">Spending by gender and country</a></li>
-        </ol>
-      </div>
+    <section class="q" aria-labelledby="q2">
+      <h2 id="q2">What are our top selling products by volume per category?</h2>
+      <a class="shot" href="img/page-02.webp"><img src="img/page-02.webp" width="2000" height="1254" alt="Bar chart of the top 10 products by units sold, with a category slicer." loading="lazy"></a>
     </section>
-
-    <!-- 01 -->
-    <section class="q" id="p01" aria-labelledby="p01-t">
-      <div class="q-head"><span class="meta">Page 01</span><h2 id="p01-t">How the data model works: a star schema</h2></div>
-      <figure class="shot">
-        <a href="img/page-01.webp"><img src="img/page-01.webp" width="1458" height="1192" alt="Power BI model view: factSales in the middle, linked one-to-many to dimProduct, dimStore and dimCustomer." loading="lazy"></a>
-        <figcaption>Model view in Power BI. Each “1 → *” line is a one-to-many relationship.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">How it works</span>
-        <div class="body">
-          <p class="lead">One fact table of sales in the middle, three dimension tables around it.</p>
-          <p><strong>factSales</strong> has one row per order line: the numbers to add up (quantity, net price, unit cost) plus a key for each dimension. <strong>dimProduct</strong> says what was sold (name, brand, category), <strong>dimCustomer</strong> says who bought it (gender, age, country) and <strong>dimStore</strong> says where it was sold.</p>
-          <p>Each dimension links to the fact table one-to-many: one product, customer or store has many sales. That’s why a filter on any dimension, such as picking a category, flows into the sales and every measure updates with it.</p>
-        </div>
-      </div>
+    <section class="q" aria-labelledby="q3">
+      <h2 id="q3">What are our top selling products by sales revenue?</h2>
+      <a class="shot" href="img/page-03.webp"><img src="img/page-03.webp" width="2000" height="1128" alt="Bar chart of the top 10 products by sales in USD." loading="lazy"></a>
     </section>
-
-    <!-- 02 -->
-    <section class="q" id="p02" aria-labelledby="p02-t">
-      <div class="q-head"><span class="meta">Page 02</span><h2 id="p02-t">What are our top selling products by volume per category?</h2></div>
-      <figure class="shot">
-        <a href="img/page-02.webp"><img src="img/page-02.webp" width="2000" height="1254" alt="Bar chart of the top 10 products by units sold, with a category slicer beside it. SV DVD 60 DVD Storage Binder L20 Silver leads with 102 units." loading="lazy"></a>
-        <figcaption>Top 10 by units sold across all categories. The slicer on the right switches it to one category.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">Cheap media accessories and desktop PCs sell the most units.</p>
-          <p>The overall best seller is a DVD storage binder (102 units), followed by the Adventure Works Desktop PC2.33 (87), which is also the top seller in Computers. The leaders in other categories sell far fewer: the top camera sold 23 units and the top game 64.</p>
-          <p class="how"><strong>Built with:</strong> a Top N filter (top 10 by Units Sold) and a category slicer.</p>
-        </div>
-      </div>
+    <section class="q" aria-labelledby="q4">
+      <h2 id="q4">What are our top selling stores by sales revenue?</h2>
+      <a class="shot" href="img/page-04.webp"><img src="img/page-04.webp" width="2000" height="1132" alt="Bar chart of the top 10 physical stores by sales in USD, online store excluded." loading="lazy"></a>
     </section>
-
-    <!-- 03 -->
-    <section class="q" id="p03" aria-labelledby="p03-t">
-      <div class="q-head"><span class="meta">Page 03</span><h2 id="p03-t">What are our top selling products by sales revenue?</h2></div>
-      <figure class="shot">
-        <a href="img/page-03.webp"><img src="img/page-03.webp" width="2000" height="1128" alt="Bar chart of the top 10 products by sales in USD. Adventure Works Desktop PC2.33 XD233 Silver leads with $91K." loading="lazy"></a>
-        <figcaption>Top 10 products by total sales in USD.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">Desktop PCs and big TVs bring in the most money.</p>
-          <p>The Adventure Works Desktop PC2.33 in silver leads at $91K. Nine of the top 10 are Adventure Works desktops or its 52-inch LCD TV in different colors. Ranking by revenue instead of units changes the list almost completely, because the high-volume items on page 02 are cheap.</p>
-        </div>
-      </div>
+    <section class="q" aria-labelledby="q5">
+      <h2 id="q5">What are the most profitable product categories?</h2>
+      <a class="shot" href="img/page-05.webp"><img src="img/page-05.webp" width="2000" height="1124" alt="Bar chart of total profit by category, with a table of sales, profit and margin." loading="lazy"></a>
     </section>
-
-    <!-- 04 -->
-    <section class="q" id="p04" aria-labelledby="p04-t">
-      <div class="q-head"><span class="meta">Page 04</span><h2 id="p04-t">What are our top selling stores by sales revenue?</h2></div>
-      <figure class="shot">
-        <a href="img/page-04.webp"><img src="img/page-04.webp" width="2000" height="1132" alt="Bar chart of the top 10 physical stores by sales. Contoso Store Nebraska leads with $136K, then South Carolina at $131K." loading="lazy"></a>
-        <figcaption>Top 10 physical stores by total sales in USD, online store excluded.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">Nebraska, South Carolina and Maine lead the physical stores.</p>
-          <p>Nebraska made $136K, South Carolina $131K and Maine $122K. I had to leave out the online store: at $3.9M it made more than half of all sales, and next to it every physical store’s bar was too small to compare.</p>
-        </div>
-      </div>
+    <section class="q" aria-labelledby="q6">
+      <h2 id="q6">Who are our repeat customers, and what do they buy?</h2>
+      <a class="shot" href="img/page-06.webp"><img src="img/page-06.webp" width="2000" height="1124" alt="Bar chart of repeat customers' spending by category, with a table of each repeat customer's purchases." loading="lazy"></a>
     </section>
-
-    <!-- 05 -->
-    <section class="q" id="p05" aria-labelledby="p05-t">
-      <div class="q-head"><span class="meta">Page 05</span><h2 id="p05-t">What are the most profitable product categories?</h2></div>
-      <figure class="shot">
-        <a href="img/page-05.webp"><img src="img/page-05.webp" width="2000" height="1124" alt="Bar chart of total profit by category, with Computers far ahead at $1.55M, and a table of sales, profit and profit margin for each category." loading="lazy"></a>
-        <figcaption>Total profit by category, with sales and margin in the table beside it.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">Computers, by a wide margin: $1.55M of the $4.1M total profit.</p>
-          <p>That’s more than twice the next category, Home Appliances ($693K). Margins are similar everywhere, from 51% (Games and Toys) to 59% (Music, Movies and Audio Books), so a category’s profit comes from how much of it sells, not from a better markup.</p>
-        </div>
-      </div>
+    <section class="q" aria-labelledby="q7">
+      <h2 id="q7">How long do online customers wait for delivery?</h2>
+      <a class="shot" href="img/page-07.webp"><img src="img/page-07.webp" width="2000" height="1129" alt="Column chart of online orders by days to delivery, with a card showing the 3.03-day average." loading="lazy"></a>
     </section>
-
-    <!-- 06 -->
-    <section class="q" id="p06" aria-labelledby="p06-t">
-      <div class="q-head"><span class="meta">Page 06</span><h2 id="p06-t">Who are our repeat customers, and what do they buy?</h2></div>
-      <figure class="shot">
-        <a href="img/page-06.webp"><img src="img/page-06.webp" width="2000" height="1124" alt="Bar chart of repeat customers' spending by category, led by Computers at $135K, next to a table listing each repeat customer and the products they bought." loading="lazy"></a>
-        <figcaption>Repeat customers only (two or more orders): spending by category, and every item they bought.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">Only 74 of 3,165 customers came back, and they mostly buy computers.</p>
-          <p>Repeat customers spent $314K in total. Computers made up $135K of that, followed by Home Appliances ($56K) and Cell phones ($54K). The table lists who they are and every product they bought, so the sales team could reach out to them.</p>
-          <p class="how"><strong>Built with:</strong> a calculated Customer Type column (orders per customer &gt; 1) used as a page filter.</p>
-        </div>
-      </div>
+    <section class="q" aria-labelledby="q8">
+      <h2 id="q8">How have monthly sales and profit changed from 2021 to 2024?</h2>
+      <a class="shot" href="img/page-08.webp"><img src="img/page-08.webp" width="2000" height="1134" alt="Line chart of monthly total sales and total profit, 2021 to 2024." loading="lazy"></a>
     </section>
-
-    <!-- 07 -->
-    <section class="q" id="p07" aria-labelledby="p07-t">
-      <div class="q-head"><span class="meta">Page 07</span><h2 id="p07-t">How long do online customers wait for delivery?</h2></div>
-      <figure class="shot">
-        <a href="img/page-07.webp"><img src="img/page-07.webp" width="2000" height="1129" alt="Column chart of online orders by days from order to delivery, from 1 to 8 days, peaking at 3 days, with a card showing an average of 3.03 days." loading="lazy"></a>
-        <figcaption>Online orders by number of days from order to delivery.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">About three days on average.</p>
-          <p>The average wait is 3.03 days. Most orders arrive in 2 or 3 days, about 85% arrive within 4, and the slowest took 8.</p>
-          <p class="how"><strong>Built with:</strong> a Delivery Days column (delivery date minus order date) and a page filter for the online channel only.</p>
-        </div>
-      </div>
+    <section class="q" aria-labelledby="q9">
+      <h2 id="q9">Which age groups spend the most, and what product categories do they buy?</h2>
+      <a class="shot" href="img/page-09.webp"><img src="img/page-09.webp" width="2000" height="1135" alt="Stacked column chart of total sales by age group, split by product category." loading="lazy"></a>
     </section>
-
-    <!-- 08 -->
-    <section class="q" id="p08" aria-labelledby="p08-t">
-      <div class="q-head"><span class="meta">Page 08</span><h2 id="p08-t">How have monthly sales and profit changed from 2021 to 2024?</h2></div>
-      <figure class="shot">
-        <a href="img/page-08.webp"><img src="img/page-08.webp" width="2000" height="1134" alt="Line chart of monthly total sales and total profit from May 2021 to April 2024, peaking around $0.41M in early 2022 and early 2023, then declining." loading="lazy"></a>
-        <figcaption>Total sales and total profit by order month, in USD.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">Sales grew through 2022, then fell off after early 2023.</p>
-          <p>Monthly sales climbed from under $0.1M in mid-2021 to peaks of about $0.41M in early 2022 and again in early 2023. 2022 was the strongest year ($3.2M), and 2023 dropped to $2.4M. Profit follows sales closely because the margin stays near 56%. The data ends on April 20, 2024, so the last dip is a partial month, not a collapse.</p>
-        </div>
-      </div>
+    <section class="q" aria-labelledby="q10">
+      <h2 id="q10">Which genders spend the most, and where do they live?</h2>
+      <a class="shot" href="img/page-10.webp"><img src="img/page-10.webp" width="2000" height="1124" alt="Pie chart of sales by gender, and a bar chart of sales by customer country split by gender." loading="lazy"></a>
     </section>
-
-    <!-- 09 -->
-    <section class="q" id="p09" aria-labelledby="p09-t">
-      <div class="q-head"><span class="meta">Page 09</span><h2 id="p09-t">Which age groups spend the most, and what product categories do they buy?</h2></div>
-      <figure class="shot">
-        <a href="img/page-09.webp"><img src="img/page-09.webp" width="2000" height="1135" alt="Stacked column chart of total sales by age group, split by product category. The 65+ group is tallest at about $2.2M." loading="lazy"></a>
-        <figcaption>Total sales by age group, with each column split by product category.</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">Customers 65 and over spend the most: $2.2M, almost twice any other group.</p>
-          <p>That’s mainly because they’re the largest group (978 customers). Per person, every age group spends a similar $2,200–$2,450. Computers are the biggest category in every age group, followed by cell phones and home appliances.</p>
-          <p class="how"><strong>Built with:</strong> an Age Group column (18–24 up to 65+) with a hidden sort column so the groups stay in order.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 10 -->
-    <section class="q" id="p10" aria-labelledby="p10-t">
-      <div class="q-head"><span class="meta">Page 10</span><h2 id="p10-t">Which genders spend the most, and where do they live?</h2></div>
-      <figure class="shot">
-        <a href="img/page-10.webp"><img src="img/page-10.webp" width="2000" height="1124" alt="Pie chart of sales by gender, male 52% and female 48%, next to a clustered bar chart of sales by customer country split by gender, led by the United States." loading="lazy"></a>
-        <figcaption>Sales by gender (left), and by customer country split by gender (right).</figcaption>
-      </figure>
-      <div class="answer">
-        <span class="caps">Answer</span>
-        <div class="body">
-          <p class="lead">Men spend slightly more (52%), and the US is by far the biggest market.</p>
-          <p>Men spent $3.8M and women $3.5M, but there are also more male customers, so per person the two are nearly equal. US customers spent $3.8M, more than the next three countries combined (Germany, Canada and the UK). Men outspend women in every country except France.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="next">
-      <a class="back" href="../#work">← Back to all projects</a>
-      <a class="back" href="#top-of-page" onclick="window.scrollTo(0,0);return false;">Back to top ↑</a>
-    </div>
 
   </div>
 </main>
