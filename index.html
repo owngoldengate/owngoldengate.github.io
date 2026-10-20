@@ -32,6 +32,7 @@
   --accent: #1f6f7a;
   --accent-ink: #ffffff;
   --cyan: #c9a27a;
+  --code-num: #8a5a2b;
   --q1: #e6f2f0; --q2: #b6dbd8; --q3: #6fb3b3; --q4: #2f8189; --q5: #1b525c;
   --font-display: "Noto Serif", Georgia, "Times New Roman", serif;
   --font-body: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
@@ -41,14 +42,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #10181b; --surface: #172226; --foam: #132429; --ink: #e9efee; --muted: #a3b1b2; --rule: #26343a;
-    --accent: #74c4c4; --accent-ink: #10181b; --cyan: #d8b48c;
+    --accent: #74c4c4; --accent-ink: #10181b; --cyan: #d8b48c; --code-num: #d8b48c;
     --q1: #16303a; --q2: #1e5560; --q3: #2f8189; --q4: #5fb3b1; --q5: #a6dcd6;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #10181b; --surface: #172226; --foam: #132429; --ink: #e9efee; --muted: #a3b1b2; --rule: #26343a;
-  --accent: #74c4c4; --accent-ink: #10181b; --cyan: #d8b48c;
+  --accent: #74c4c4; --accent-ink: #10181b; --cyan: #d8b48c; --code-num: #d8b48c;
   --q1: #16303a; --q2: #1e5560; --q3: #2f8189; --q4: #5fb3b1; --q5: #a6dcd6;
   color-scheme: dark;
 }
@@ -326,6 +327,30 @@ a.profile svg { flex: none; width: 22px; height: 22px; fill: var(--accent); }
 .svg-grid { stroke: var(--rule); stroke-width: 1; }
 .svg-axis { stroke: var(--muted); stroke-width: 1; }
 
+/* SQL project: wide card, schema, code and result tables */
+.card.wide { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 44px); align-items: center; }
+.card .thumb > img.top { object-position: top; }
+.q { font-family: var(--font-display); font-weight: 600; font-size: var(--s1); line-height: 1.35; max-width: 56ch; }
+.sql { margin: 0; padding: 16px 18px; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; overflow-x: auto; font-family: var(--font-mono); font-size: 0.84rem; line-height: 1.6; color: var(--ink); }
+.sql code { font: inherit; white-space: pre; }
+.sql .k { color: var(--accent); font-weight: 500; }
+.sql .f { color: var(--accent); font-style: italic; }
+.sql .n { color: var(--code-num); }
+.result { display: grid; gap: 8px; min-width: 0; }
+.result .tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; }
+.result table { border-collapse: collapse; width: 100%; font-size: 0.86rem; font-variant-numeric: tabular-nums; }
+.result th, .result td { padding: 6px 12px; text-align: left; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.result tr:last-child td { border-bottom: 0; }
+.result th { background: var(--surface); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--muted); }
+.result .n { text-align: right; }
+.schema { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.schema .stack { display: grid; gap: 10px; }
+.tbl-box { display: grid; gap: 1px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); min-width: 0; }
+.tbl-box b { font-family: var(--font-mono); font-weight: 500; font-size: 0.92rem; color: var(--accent); }
+.tbl-box em { font-style: normal; color: var(--ink); }
+.schema .link { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
+.poster { max-width: 560px; }
+
 footer .wrap { padding-block: 26px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; border-top: 1px solid var(--rule); }
 
 @media (max-width: 820px) {
@@ -448,6 +473,16 @@ footer .wrap { padding-block: 26px; display: flex; flex-wrap: wrap; justify-cont
     <div class="wrap">
       <div class="sec-head"><span class="caps">Selected work</span><h2 id="work-title">Projects</h2></div>
       <div class="grid">
+        <a class="card" href="#climate-sql">
+          <div class="thumb"><img class="top" src="img/SQL-Climate-poster.jpg" alt="Poster titled How we measure emissions changes the story, comparing total and per-person CO2 emissions by continent"></div>
+          <div class="body">
+            <ul class="tags"><li>SQL</li><li>Data analysis</li><li>Fall 2026</li></ul>
+            <h3>How we measure emissions changes the story</h3>
+            <p class="dek">Global CO₂ and energy data in SQL</p>
+            <p>Three queries on 75 years of climate data, from multi-table joins to window functions, and a poster built from the results.</p>
+            <span class="more">Read the case study <span class="arr">→</span></span>
+          </div>
+        </a>
         <a class="card" href="#denver">
           <div class="thumb" data-thumb="denver"></div>
           <div class="body">
@@ -752,16 +787,147 @@ footer .wrap { padding-block: 26px; display: flex; flex-wrap: wrap; justify-cont
     return '<div class="p-head"><a class="back" href="#work">← All projects</a><span class="meta">' + kicker + '</span><h1 id="p-title" tabindex="-1">' + (hook || title) + '</h1>' + sub + '<p class="lede">' + lede + '</p></div>';
   }
 
-  var ORDER = ['denver', 'cires', 'screen-time-app', 'ai-survey', 'screen-time-study', 'disaster-redesign'];
+  var ORDER = ['climate-sql', 'denver', 'cires', 'screen-time-app', 'ai-survey', 'screen-time-study', 'disaster-redesign'];
   var TITLES = {
+    'climate-sql': 'Global CO₂ and energy data in SQL',
     'denver': 'Crime and health equity in Denver', 'cires': 'Migrating CIRES content into Helpjuice', 'screen-time-app': 'Designing a screen-time app people will keep using',
     'ai-survey': 'How CU students use AI', 'screen-time-study': 'Does screen time affect my mood?', 'disaster-redesign': 'Redesigning NOAA\'s billion-dollar disaster chart'
   };
   var HOOKS = {
+    'climate-sql': 'How we measure emissions changes the story',
     'denver': 'More violent, not more crime', 'cires': '150 articles, one new home', 'screen-time-app': 'Nudge, don\'t lock',
     'ai-survey': 'AI in the classroom, by the numbers', 'screen-time-study': 'Does screen time affect my mood?', 'disaster-redesign': 'Counting dollars, not disasters'
   };
   var PAGES = {};
+
+  // ---------- SQL project ----------
+  var SQL_KW = /^(SELECT|FROM|JOIN|ON|AS|WHERE|AND|OR|GROUP|BY|ORDER|DESC|ASC|LIMIT|WITH|OVER|PARTITION|IS|NOT|NULL)$/i;
+  var SQL_FN = /^(COUNT|SUM|ROUND|ROW_NUMBER|AVG|MIN|MAX)$/i;
+  function hl(sql) {
+    return sql.replace(/('[^']*')|(\b\d+(?:\.\d+)?\b)|([A-Za-z_][A-Za-z0-9_]*)|([^'A-Za-z0-9_]+)/g, function (m, s, n, w, o) {
+      if (s) return '<span class="n">' + esc(s) + '</span>';
+      if (n) return '<span class="n">' + n + '</span>';
+      if (w) return SQL_KW.test(w) ? '<span class="k">' + w + '</span>' : SQL_FN.test(w) ? '<span class="f">' + w + '</span>' : w;
+      return esc(o);
+    });
+  }
+  function fmt(v, dec) {
+    if (typeof v !== 'number') return esc(v);
+    if (!dec) return v >= 10000 ? v.toLocaleString('en-US') : String(v);
+    return v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function result(cols, rows) {
+    var num = cols.map(function (_, i) { return typeof rows[0][i] === 'number'; });
+    var dec = cols.map(function (_, i) { return rows.some(function (r) { return typeof r[i] === 'number' && !Number.isInteger(r[i]); }); });
+    return '<div class="result"><span class="meta">Result · ' + rows.length + ' rows</span><div class="tbl" tabindex="0" role="region" aria-label="Query result"><table><thead><tr>' +
+      cols.map(function (c, i) { return '<th scope="col"' + (num[i] ? ' class="n"' : '') + '>' + esc(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      rows.map(function (r) { return '<tr>' + r.map(function (v, i) { return '<td' + (num[i] ? ' class="n"' : '') + '>' + fmt(v, dec[i]) + '</td>'; }).join('') + '</tr>'; }).join('') +
+      '</tbody></table></div></div>';
+  }
+  function query(question, skills, sql, cols, rows) {
+    return '<p class="q">' + question + '</p><ul class="tags">' + skills.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul>' +
+      '<pre class="sql"><code>' + hl(sql) + '</code></pre>' + result(cols, rows);
+  }
+  var Q1 = [
+    'SELECT r.region_name AS continent,',
+    '       COUNT(*) AS countries_included,',
+    '       SUM(e.population) AS population_included,',
+    '       ROUND(SUM(e.co2), 2) AS total_co2_mt,',
+    '       ROUND(SUM(e.co2) * 1000000.0 / SUM(e.population), 2)',
+    '           AS co2_tonnes_per_person',
+    'FROM emissions AS e',
+    'JOIN countries AS c ON c.iso_code = e.iso_code',
+    'JOIN regions AS r ON r.region_id = c.region_id',
+    'WHERE e.year = 2024',
+    '  AND e.co2 IS NOT NULL',
+    '  AND e.population > 0',
+    'GROUP BY r.region_id, r.region_name',
+    'ORDER BY SUM(e.co2) DESC;'
+  ].join('\n');
+  var Q2 = [
+    'SELECT c.country_name,',
+    '       ROUND(baseline.co2, 2) AS co2_2000_mt,',
+    '       ROUND(recent.co2, 2) AS co2_2024_mt,',
+    '       ROUND(baseline.co2 - recent.co2, 2) AS reduction_mt,',
+    '       ROUND(100.0 * (baseline.co2 - recent.co2) / baseline.co2, 2)',
+    '           AS reduction_pct',
+    'FROM emissions AS baseline',
+    'JOIN emissions AS recent ON recent.iso_code = baseline.iso_code',
+    'JOIN countries AS c ON c.iso_code = baseline.iso_code',
+    'WHERE baseline.year = 2000',
+    '  AND recent.year = 2024',
+    '  AND baseline.co2 >= 10',
+    '  AND recent.population >= 1000000',
+    '  AND recent.co2 IS NOT NULL',
+    '  AND recent.co2 >= 0',
+    '  AND recent.co2 < baseline.co2',
+    'ORDER BY (baseline.co2 - recent.co2) / baseline.co2 DESC,',
+    '         c.country_name',
+    'LIMIT 10;'
+  ].join('\n');
+  var Q3 = [
+    'WITH eligible_countries AS (',
+    '    SELECT r.region_name AS continent,',
+    '           c.country_name,',
+    '           e.electricity_generation,',
+    '           e.renewables_share_elec,',
+    '           e.nuclear_share_elec,',
+    '           e.low_carbon_share_elec',
+    '    FROM energy AS e',
+    '    JOIN countries AS c ON c.iso_code = e.iso_code',
+    '    JOIN regions AS r ON r.region_id = c.region_id',
+    '    WHERE e.year = 2024',
+    '      AND e.electricity_generation >= 100',
+    '      AND e.low_carbon_share_elec IS NOT NULL',
+    '),',
+    'ranked_countries AS (',
+    '    SELECT continent,',
+    '           country_name,',
+    '           electricity_generation,',
+    '           renewables_share_elec,',
+    '           nuclear_share_elec,',
+    '           low_carbon_share_elec,',
+    '           ROW_NUMBER() OVER (',
+    '               PARTITION BY continent',
+    '               ORDER BY low_carbon_share_elec DESC, country_name',
+    '           ) AS continent_rank',
+    '    FROM eligible_countries',
+    ')',
+    'SELECT continent,',
+    '       continent_rank,',
+    '       country_name,',
+    '       ROUND(electricity_generation, 2) AS electricity_twh,',
+    '       ROUND(renewables_share_elec, 2) AS renewables_pct,',
+    '       ROUND(nuclear_share_elec, 2) AS nuclear_pct,',
+    '       ROUND(low_carbon_share_elec, 2) AS low_carbon_pct',
+    'FROM ranked_countries',
+    'WHERE continent_rank <= 3',
+    'ORDER BY continent, continent_rank;'
+  ].join('\n');
+  var R1 = [['Asia', 50, 4783684123, 23137.44, 4.84], ['Americas', 46, 1044292264, 7194.12, 6.89], ['Europe', 42, 743034792, 4865.17, 6.55], ['Africa', 55, 1512236746, 1502.10, 0.99], ['Oceania', 19, 45827657, 436.90, 9.53]];
+  var R2 = [['Ukraine', 285.66, 142.50, 143.17, 50.12], ['Greece', 102.97, 53.36, 49.61, 48.18], ['Finland', 57.02, 29.77, 27.24, 47.78], ['Denmark', 54.31, 28.37, 25.94, 47.76], ['Estonia', 15.47, 8.31, 7.16, 46.31], ['Portugal', 65.50, 35.54, 29.97, 45.75], ['United Kingdom', 569.03, 312.91, 256.13, 45.01], ['Syria', 54.53, 31.78, 22.75, 41.72], ['Czechia', 127.23, 75.62, 51.61, 40.56], ['Germany', 898.98, 572.32, 326.66, 36.34]];
+  var R3 = [['Africa', 1, 'South Africa', 247.52, 12.51, 3.15, 15.66], ['Africa', 2, 'Egypt', 237.39, 11.20, 0.00, 11.20], ['Americas', 1, 'Brazil', 745.72, 87.33, 2.12, 89.45], ['Americas', 2, 'Canada', 636.79, 64.27, 13.42, 77.69], ['Americas', 3, 'United States', 4391.02, 24.06, 17.81, 41.87], ['Asia', 1, 'Pakistan', 174.96, 37.20, 13.08, 50.27], ['Asia', 2, 'Turkey', 341.23, 45.61, 0.00, 45.61], ['Asia', 3, 'Vietnam', 303.58, 42.28, 0.00, 42.28], ['Europe', 1, 'Sweden', 172.15, 69.36, 29.43, 98.79], ['Europe', 2, 'Norway', 157.11, 98.61, 0.00, 98.61], ['Europe', 3, 'France', 561.78, 27.18, 67.72, 94.90], ['Oceania', 1, 'Australia', 281.64, 35.08, 0.00, 35.08]];
+
+  PAGES['climate-sql'] = function () {
+    return head('Case study · SQL · INFO 3401, Fall 2026', TITLES['climate-sql'],
+      'I loaded Our World in Data’s CO₂ and energy datasets into a four-table SQLite database, wrote three queries, and designed a poster from the first one.') +
+      facts([['Tools', 'SQL (SQLite), VS Code'], ['Data', 'Our World in Data CO₂ and energy, 1950–2025'], ['Scope', '231 countries, 4 tables'], ['Skills', 'Joins, self join, aggregates, CTEs, window functions']]) +
+      sec('The poster', '<figure class="figure poster"><img src="img/SQL-Climate-poster.jpg" alt="Poster: How we measure emissions changes the story. 62.3% of measured CO2 emissions came from Asia. Oceania emitted 9.53 tonnes of CO2 per person. Takeaway: use both measures to understand climate impact."><figcaption>Built from Query 1. <a href="SQL-Climate-poster.pdf" target="_blank" rel="noopener">Open the full poster (PDF)</a></figcaption></figure>') +
+      sec('Data model', '<div class="schema">' +
+        '<div class="tbl-box"><b>regions</b><em>region_id PK</em><span>region_name</span><span>5 rows</span></div><span class="link">1 → many</span>' +
+        '<div class="tbl-box"><b>countries</b><em>iso_code PK</em><em>region_id FK</em><span>country_name</span><span>231 rows</span></div><span class="link">1 → many</span>' +
+        '<div class="stack"><div class="tbl-box"><b>emissions</b><em>iso_code, year PK</em><span>co2, population, …</span><span>16,350 rows</span></div>' +
+        '<div class="tbl-box"><b>energy</b><em>iso_code, year PK</em><span>electricity, low-carbon share, …</span><span>10,560 rows</span></div></div></div>') +
+      sec('Query 1', query('How did total and per-person CO₂ compare across continents in 2024?',
+        ['3-table JOIN', 'GROUP BY', 'SUM · COUNT', 'Calculated rate'], Q1,
+        ['continent', 'countries_included', 'population_included', 'total_co2_mt', 'co2_tonnes_per_person'], R1)) +
+      sec('Query 2', query('Which 10 countries cut annual CO₂ the most between 2000 and 2024, by percentage?',
+        ['Self JOIN', 'Multi-condition WHERE', 'Percent change', 'ORDER BY · LIMIT'], Q2,
+        ['country_name', 'co2_2000_mt', 'co2_2024_mt', 'reduction_mt', 'reduction_pct'], R2)) +
+      sec('Query 3', query('Which three countries in each continent had the highest low-carbon electricity share in 2024?',
+        ['CTEs', 'ROW_NUMBER() OVER', 'PARTITION BY', '3-table JOIN'], Q3,
+        ['continent', 'continent_rank', 'country_name', 'electricity_twh', 'renewables_pct', 'nuclear_pct', 'low_carbon_pct'], R3));
+  };
 
   PAGES['denver'] = function () {
     return head('Case study · GIS and data analysis · Fall 2026', TITLES['denver'],
