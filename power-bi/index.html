@@ -64,7 +64,10 @@ p { margin: 0; }
 /* Report pages */
 .q { padding-block: clamp(30px, 5vw, 52px); border-bottom: 1px solid var(--rule); display: grid; gap: 18px; }
 .q h2 { font-size: var(--s2); line-height: 1.2; max-width: 34ch; }
-.q .intro { max-width: 66ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; font-size: var(--s-1); color: var(--muted); }
+.legend div { display: flex; gap: 6px; }
+.legend dt { font-family: var(--font-mono); color: var(--ink); }
+.legend dd { margin: 0; }
 .shot { display: block; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: #ffffff; line-height: 0; }
 .shot img { width: 100%; height: auto; display: block; }
 footer .wrap { padding-block: 26px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; border-top: 1px solid var(--rule); }
@@ -104,7 +107,13 @@ footer .wrap { padding-block: 26px; display: flex; flex-wrap: wrap; justify-cont
 
     <section class="q" aria-labelledby="schema">
       <h2 id="schema">Star Schema</h2>
-      <p class="intro">A star schema connects several tables through shared keys. In the middle is the factSales table, with one row for each item sold: the quantity, price and cost, plus a key for the product, customer and store. Around it are three dimension tables. dimProduct describes what was sold, dimCustomer describes who bought it, and dimStore describes where it was sold. Each dimension links to factSales one-to-many, because one product, customer or store can appear in many sales.</p>
+      <dl class="legend">
+        <div><dt>factSales</dt><dd>Fact table, one row per item sold</dd></div>
+        <div><dt>dimProduct</dt><dd>What was sold</dd></div>
+        <div><dt>dimCustomer</dt><dd>Who bought it</dd></div>
+        <div><dt>dimStore</dt><dd>Where it was sold</dd></div>
+        <div><dt>1 → *</dt><dd>One-to-many link</dd></div>
+      </dl>
       <a class="shot" href="img/page-01.webp"><img src="img/page-01.webp" width="1458" height="1192" alt="Power BI model view: factSales in the middle, linked one-to-many to dimProduct, dimStore and dimCustomer." loading="lazy"></a>
     </section>
 
